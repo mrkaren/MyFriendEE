@@ -10,6 +10,12 @@
 <html>
 <head>
     <title>My Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
 </head>
 <body>
 <%
@@ -27,13 +33,17 @@ Welcome <%=currentUser.getName()%> | <a href="/logout">Logout</a>
     <li><a href="/mySentMessages">View My Sent Messages</a></li>
 </ul>
 <div>
-    <table>
+    <a href="/exportUsersToExcel">Export to Excel</a>
+    <table id="users" class="table table-striped">
+        <thead>
         <tr>
             <th>image</th>
             <th>name</th>
             <th>surname</th>
             <th>action</th>
         </tr>
+        </thead>
+        <tbody>
         <%
             for (User user : users) { %>
         <tr>
@@ -47,8 +57,14 @@ Welcome <%=currentUser.getName()%> | <a href="/logout">Logout</a>
             <td><a href="/sendFriendRequest?friendId=<%=user.getId()%>">Send Request</a></td>
         </tr>
         <%}%>
+        </tbody>
 
     </table>
 </div>
+<script>
+    $(document).ready(function () {
+        new DataTable('#users');
+    })
+</script>
 </body>
 </html>
