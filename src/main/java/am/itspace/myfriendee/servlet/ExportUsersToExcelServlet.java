@@ -80,5 +80,6 @@ public class ExportUsersToExcelServlet extends HttpServlet {
             emailCell.setCellValue(user.getEmail());
             usersSheet.autoSizeColumn(2);
         }
+        return workbook;
     }
 }
